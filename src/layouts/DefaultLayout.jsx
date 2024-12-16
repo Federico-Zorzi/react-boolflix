@@ -10,7 +10,7 @@ export default function DefaultLayout() {
       <div className="wrapper">
         <Header></Header>
         <Outlet></Outlet>
-        <Footer></Footer>
+        {/* <Footer></Footer> */}
       </div>
     </>
   );
