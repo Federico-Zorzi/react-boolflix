@@ -19,12 +19,8 @@ export default function Card({
 
   const rateStarsConversion = (rate) => {
     let decodStars = [];
-    const prov = rate / 2;
     const numbTrunc = Math.trunc(rate / 2);
     const numOfStars = Math.round(rate / 2);
-    console.log(
-      `rate: ${rate} , prov: ${prov}, numbTrunc:${numbTrunc} , numOfStars: ${numOfStars}`
-    );
 
     for (let i = 1; i <= 5; i++) {
       if (i <= numOfStars) {
