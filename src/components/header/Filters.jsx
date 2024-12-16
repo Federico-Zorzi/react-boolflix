@@ -38,8 +38,8 @@ export default function Filters() {
             placeholder="Search..."
             aria-label="Search"
           />
-          <button className="btn btn-outline-success" type="submit">
-            Search
+          <button className="btn btn-outline-secondary" type="submit">
+            <i className="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
       </div>

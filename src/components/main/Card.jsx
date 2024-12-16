@@ -13,6 +13,7 @@ export default function Card({
     if (newLang == "en") newLang = "GB";
     if (newLang == "sv") newLang = "SE";
     if (newLang == "hi") newLang = "IN";
+    if (newLang == "ja") newLang = "JP";
 
     return newLang.toUpperCase();
   };
@@ -44,7 +45,7 @@ export default function Card({
   const startsConv = rateStarsConversion(vote);
 
   return (
-    <div className="card h-100">
+    <div className="card">
       <div className="overlay">
         {posterImage ? (
           <img
@@ -60,7 +61,7 @@ export default function Card({
         )}
       </div>
 
-      <div className="card-body">
+      <div className="card-body h-100">
         <h5 className="card-title">{title}</h5>
         <h6>({originalTitle})</h6>
         <div className="language text-center">
@@ -68,12 +69,15 @@ export default function Card({
         </div>
         <div className="rate text-center pb-2">
           {startsConv && Array.isArray(startsConv)
-            ? startsConv.map((star) => {
+            ? startsConv.map((star, index) => {
                 if (star === "full") {
-                  return <i className="fa-solid fa-star"></i>;
+                  return <i key={index} className="fa-solid fa-star"></i>;
                 } else if (star === "empty") {
-                  return <i className="fa-regular fa-star"></i>;
-                } else return <i className="fa-solid fa-star-half-stroke"></i>;
+                  return <i key={index} className="fa-regular fa-star"></i>;
+                } else
+                  return (
+                    <i key={index} className="fa-solid fa-star-half-stroke"></i>
+                  );
               })
             : ""}
         </div>
