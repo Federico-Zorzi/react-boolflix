@@ -16,4 +16,33 @@ main {
   flex-grow: 1;
 
   background-color: rgb(67, 67, 67);
+  color: #b0b0b0;
+}
+
+.card {
+  border: none;
+}
+
+.card .card-body {
+  display: none;
+}
+
+.overlay img {
+  height: 100%;
+}
+
+.card:hover .card-body {
+  cursor: pointer;
+  display: block;
+}
+
+.card:hover .overlay {
+  /*  opacity: 0%;
+  transition: opacity 1s; */
+  display: none;
+}
+
+.card-text {
+  max-height: 250px;
+  overflow: auto;
 }

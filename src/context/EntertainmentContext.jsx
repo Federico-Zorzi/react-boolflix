@@ -1,12 +1,12 @@
 import { createContext, useContext, useState } from "react";
 
-const MoviesContext = createContext();
+const EntertainmentContext = createContext();
 
 //* export context for consumers
-export const useMoviesContext = () => useContext(MoviesContext);
+export const useEntertainmentContext = () => useContext(EntertainmentContext);
 
 //* export context for provider
-export const MoviesContextProvider = ({ children }) => {
+export const EntertainmentContextProvider = ({ children }) => {
   const apiPath = import.meta.env.VITE_API_URL;
   const apiKey = import.meta.env.VITE_API_KEY;
 
@@ -25,21 +25,15 @@ export const MoviesContextProvider = ({ children }) => {
       },
     };
 
-    /*  0: Object { adult: false, backdrop_path: "/hziiv14OpD73u9gAak4XDDfBKa2.jpg", id: 671, … }
-    ​​    adult: false
-    ​​​    backdrop_path: "/hziiv14OpD73u9gAak4XDDfBKa2.jpg"
-    ​​​    genre_ids: Array [ 12, 14 ]
+    /*  genre_ids: Array [ 12, 14 ]
     ​​​    id: 671
-    ​​​    original_language: "en"
-    ​​​    original_title: "Harry Potter and the Philosopher's Stone"
-    ​​​    overview: "Harry Potter has lived under the stairs at his aunt and uncle's house his whole life. But on his 11th birthday, he learns he's a powerful wizard—with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry. As he learns to harness his newfound powers with the help of the school's kindly headmaster, Harry uncovers the truth about his parents' deaths—and about the villain who's to blame."
-    ​​​    popularity: 235.719
-    ​​​    poster_path: "/wuMc08IPKEatf9rnMNXvIDxqP4W.jpg"
-    ​​​    release_date: "2001-11-16"
     ​​​    title: "Harry Potter and the Philosopher's Stone"
-    ​​​    video: false
+    ​​​    original_title: "Harry Potter and the Philosopher's Stone"
+    ​​​    original_language: "en"
+    ​​​    overview: "Harry Potter has lived under the stairs at his aunt and uncle's house his whole life. But on his 11th birthday, he learns he's a powerful wizard—with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry. As he learns to harness his newfound powers with the help of the school's kindly headmaster, Harry uncovers the truth about his parents' deaths—and about the villain who's to blame."
     ​​​    vote_average: 7.908
-    ​​​    vote_count: 27492 */
+    ​​​    poster_path: "/wuMc08IPKEatf9rnMNXvIDxqP4W.jpg"
+*/
 
     fetch(url, options)
       .then((res) => res.json())
@@ -70,20 +64,19 @@ export const MoviesContextProvider = ({ children }) => {
           };
         });
 
-        console.log(moviesList);
         setMoviesList(moviesList);
       })
       .catch((err) => console.error(err));
   };
 
-  const contextData = {
+  const entertainmentContextData = {
     movies: moviesList,
     search: fetchSearch,
   };
 
   return (
-    <MoviesContext.Provider value={contextData}>
+    <EntertainmentContext.Provider value={entertainmentContextData}>
       {children}
-    </MoviesContext.Provider>
+    </EntertainmentContext.Provider>
   );
 };

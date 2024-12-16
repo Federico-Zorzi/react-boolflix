@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMoviesContext } from "../context/MoviesContext";
+import { useEntertainmentContext } from "../../context/EntertainmentContext";
 
 export default function Filters() {
   //* inizialization form data
@@ -18,7 +18,7 @@ export default function Filters() {
   };
 
   //* use context variables
-  const { search } = useMoviesContext();
+  const { search } = useEntertainmentContext();
 
   return (
     <nav className="navbar">

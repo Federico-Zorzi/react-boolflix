@@ -1,8 +1,12 @@
+import Movies from "../components/main/movies";
+import Series from "../components/main/Series";
+
 export default function HomePage() {
   return (
     <main>
-      <div className="container pt-3">
-        <h2>Movies</h2>
+      <div className="container">
+        <Movies></Movies>
+        <Series></Series>
       </div>
     </main>
   );

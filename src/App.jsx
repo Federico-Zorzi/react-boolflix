@@ -2,7 +2,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //* import context provider
-import { MoviesContextProvider } from "./context/MoviesContext";
+import { EntertainmentContextProvider } from "./context/EntertainmentContext";
 
 import DefaultLayout from "./layouts/DefaultLayout";
 
@@ -11,7 +11,7 @@ import HomePage from "./pages/HomePage";
 function App() {
   return (
     <>
-      <MoviesContextProvider>
+      <EntertainmentContextProvider>
         <BrowserRouter>
           <Routes>
             <Route Component={DefaultLayout}>
@@ -19,7 +19,7 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter>
-      </MoviesContextProvider>
+      </EntertainmentContextProvider>
     </>
   );
 }
