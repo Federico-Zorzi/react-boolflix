@@ -1,0 +1,19 @@
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: black;
+}
+
+header h1 {
+  color: red;
+}
+
+main {
+  flex-grow: 1;
+
+  background-color: rgb(67, 67, 67);
+}
