@@ -46,3 +46,8 @@ main {
   max-height: 200px;
   overflow: auto;
 }
+
+.fa-star,
+.fa-star-half-stroke {
+  color: rgb(255, 230, 0);
+}

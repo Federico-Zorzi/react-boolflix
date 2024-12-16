@@ -7,7 +7,7 @@ export default function Card({
   posterImage,
 }) {
   //* function languages flags management
-  function languagesManagement(language) {
+  const languagesManagement = (language) => {
     let newLang = language;
 
     if (newLang == "en") newLang = "GB";
@@ -15,14 +15,37 @@ export default function Card({
     if (newLang == "hi") newLang = "IN";
 
     return newLang.toUpperCase();
-  }
+  };
 
-  function rateManagement(rate) {}
+  const rateStarsConversion = (rate) => {
+    let decodStars = [];
+    const prov = rate / 2;
+    const numbTrunc = Math.trunc(rate / 2);
+    const numOfStars = Math.round(rate / 2);
+    console.log(
+      `rate: ${rate} , prov: ${prov}, numbTrunc:${numbTrunc} , numOfStars: ${numOfStars}`
+    );
+
+    for (let i = 1; i <= 5; i++) {
+      if (i <= numOfStars) {
+        if (i == numOfStars && rate / 2 - numbTrunc >= 0.5) {
+          decodStars.push("semi-empty");
+        } else {
+          decodStars.push("full");
+        }
+      } else {
+        decodStars.push("empty");
+      }
+    }
+
+    return decodStars;
+  };
 
   const posterPath = import.meta.env.VITE_API_URL_POSTER_IMAGES;
 
   const language = languagesManagement(originalLanguage);
   const flagImgPath = `https://flagsapi.com/${language}/flat/64.png`;
+  const startsConv = rateStarsConversion(vote);
 
   return (
     <div className="card h-100">
@@ -47,7 +70,17 @@ export default function Card({
         <div className="language text-center">
           <img src={flagImgPath} />
         </div>
-        <div className="rate text-center pb-2">{vote}</div>
+        <div className="rate text-center pb-2">
+          {startsConv && Array.isArray(startsConv)
+            ? startsConv.map((star) => {
+                if (star === "full") {
+                  return <i className="fa-solid fa-star"></i>;
+                } else if (star === "empty") {
+                  return <i className="fa-regular fa-star"></i>;
+                } else return <i className="fa-solid fa-star-half-stroke"></i>;
+              })
+            : ""}
+        </div>
         <p className="card-text">{overview}</p>
       </div>
     </div>
