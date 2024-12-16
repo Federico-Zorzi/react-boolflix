@@ -6,7 +6,23 @@ export default function Card({
   overview,
   posterImage,
 }) {
+  //* function languages flags management
+  function languagesManagement(language) {
+    let newLang = language;
+
+    if (newLang == "en") newLang = "GB";
+    if (newLang == "sv") newLang = "SE";
+    if (newLang == "hi") newLang = "IN";
+
+    return newLang.toUpperCase();
+  }
+
+  function rateManagement(rate) {}
+
   const posterPath = import.meta.env.VITE_API_URL_POSTER_IMAGES;
+
+  const language = languagesManagement(originalLanguage);
+  const flagImgPath = `https://flagsapi.com/${language}/flat/64.png`;
 
   return (
     <div className="card h-100">
@@ -28,8 +44,10 @@ export default function Card({
       <div className="card-body">
         <h5 className="card-title">{title}</h5>
         <h6>({originalTitle})</h6>
-        <div className="language text-center">{originalLanguage}</div>
-        <div className="rate text-center">{vote}</div>
+        <div className="language text-center">
+          <img src={flagImgPath} />
+        </div>
+        <div className="rate text-center pb-2">{vote}</div>
         <p className="card-text">{overview}</p>
       </div>
     </div>
