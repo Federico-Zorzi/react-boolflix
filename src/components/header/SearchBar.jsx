@@ -1,12 +1,12 @@
 import { useEntertainmentContext } from "../../context/EntertainmentContext";
 
-export default function SearchBar({ handleFormData, formData }) {
+export default function SearchBar({ handleFormData, formData, setFormData }) {
   //* use context variables
   const { search } = useEntertainmentContext();
 
   return (
     <form
-      onSubmit={(e) => search(e, formData)}
+      onSubmit={(e) => search(e, formData, setFormData)}
       className="d-flex"
       role="search"
     >

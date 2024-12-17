@@ -19,7 +19,7 @@ export const EntertainmentContextProvider = ({ children }) => {
   const [isLoadingMovies, setIsLoadingMovies] = useState(false);
   const [isLoadingSeries, setIsLoadingSeries] = useState(false);
 
-  const fetchSearch = (e, formData) => {
+  const fetchSearch = (e, formData, setFormData) => {
     e.preventDefault();
     setIsLoadingMovies(true);
     setIsLoadingSeries(true);
@@ -68,6 +68,13 @@ export const EntertainmentContextProvider = ({ children }) => {
         setMoviesList(moviesList);
         setDefaultMoviesList(moviesList);
         setIsLoadingMovies(false);
+
+        //* reinizialization form data
+        const defaultFormData = {
+          title: "",
+          genre: "",
+        };
+        setFormData(defaultFormData);
       })
       .catch((err) => console.error(err));
 
