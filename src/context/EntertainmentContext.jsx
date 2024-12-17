@@ -11,6 +11,9 @@ export const EntertainmentContextProvider = ({ children }) => {
   const apiKey =
     "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZGFkYzZhN2M1Mjc0MGI1MGRjY2MzYzQ2YzFkODVmNSIsIm5iZiI6MTczNDM0MDI2Ny4xNjgsInN1YiI6IjY3NWZlZWFiNWJkM2M3MmE4MmMxYzExYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gSItpMlGqXKWPWwj8y_NVsW-APqIBzj80I_pJY2wR_E";
 
+  const [defultMoviesList, setDefaultMoviesList] = useState(null);
+  const [defultSeriesList, setDefaultSeriesList] = useState(null);
+
   const [moviesList, setMoviesList] = useState(null);
   const [seriesList, setSeriesList] = useState(null);
   const [isLoadingMovies, setIsLoadingMovies] = useState(false);
@@ -47,6 +50,7 @@ export const EntertainmentContextProvider = ({ children }) => {
             overview,
             poster_path,
             vote_average,
+            genre_ids,
           } = movie;
 
           return {
@@ -57,10 +61,12 @@ export const EntertainmentContextProvider = ({ children }) => {
             overview,
             poster_path,
             vote_average,
+            genre: genre_ids,
           };
         });
 
         setMoviesList(moviesList);
+        setDefaultMoviesList(moviesList);
         setIsLoadingMovies(false);
       })
       .catch((err) => console.error(err));
@@ -81,6 +87,7 @@ export const EntertainmentContextProvider = ({ children }) => {
             overview,
             poster_path,
             vote_average,
+            genre_ids,
           } = serie;
 
           return {
@@ -91,21 +98,38 @@ export const EntertainmentContextProvider = ({ children }) => {
             overview,
             poster_path,
             vote_average,
+            genre: genre_ids,
           };
         });
 
         setSeriesList(seriesList);
+        setDefaultSeriesList(seriesList);
         setIsLoadingSeries(false);
       })
       .catch((err) => console.error(err));
   };
 
+  const selectGenre = (id) => {
+    let movieListFiltered = defultMoviesList;
+
+    if (id) {
+      movieListFiltered = defultMoviesList.filter((movie) =>
+        movie.genre.includes(parseInt(id))
+      );
+      setMoviesList(movieListFiltered);
+    } else {
+      setMoviesList(defultMoviesList);
+      setSeriesList(defultSeriesList);
+    }
+  };
+
   const entertainmentContextData = {
     movies: moviesList,
     series: seriesList,
-    search: fetchSearch,
     isLoadingMovies,
     isLoadingSeries,
+    selectGenre,
+    search: fetchSearch,
   };
 
   return (
