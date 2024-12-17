@@ -11,14 +11,15 @@ export const EntertainmentContextProvider = ({ children }) => {
   const apiKey =
     "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZGFkYzZhN2M1Mjc0MGI1MGRjY2MzYzQ2YzFkODVmNSIsIm5iZiI6MTczNDM0MDI2Ny4xNjgsInN1YiI6IjY3NWZlZWFiNWJkM2M3MmE4MmMxYzExYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gSItpMlGqXKWPWwj8y_NVsW-APqIBzj80I_pJY2wR_E";
 
-  const [defultMoviesList, setDefaultMoviesList] = useState(null);
-  const [defultSeriesList, setDefaultSeriesList] = useState(null);
+  const [defultMoviesList, setDefaultMoviesList] = useState([]);
+  const [defultSeriesList, setDefaultSeriesList] = useState([]);
 
   const [moviesList, setMoviesList] = useState(null);
   const [seriesList, setSeriesList] = useState(null);
   const [isLoadingMovies, setIsLoadingMovies] = useState(false);
   const [isLoadingSeries, setIsLoadingSeries] = useState(false);
 
+  //* search movies & series by searchbar
   const fetchSearch = (e, formData, setFormData) => {
     e.preventDefault();
     setIsLoadingMovies(true);
@@ -116,26 +117,29 @@ export const EntertainmentContextProvider = ({ children }) => {
       .catch((err) => console.error(err));
   };
 
+  //* filter movies & series by genre
   const selectGenre = (id) => {
     let moviesListFiltered = defultMoviesList;
     let seriesListFiltered = defultSeriesList;
 
-    if (id) {
+    if (defultMoviesList && id) {
       moviesListFiltered = defultMoviesList.filter((movie) =>
         movie.genre.includes(parseInt(id))
       );
+
+      setMoviesList(moviesListFiltered);
+    } else setSeriesList(defultSeriesList);
+
+    if (defultSeriesList && id) {
       seriesListFiltered = defultSeriesList.filter((serie) =>
         serie.genre.includes(parseInt(id))
       );
 
-      setMoviesList(moviesListFiltered);
       setSeriesList(seriesListFiltered);
-    } else {
-      setMoviesList(defultMoviesList);
-      setSeriesList(defultSeriesList);
-    }
+    } else setMoviesList(defultMoviesList);
   };
 
+  //* context data for App
   const entertainmentContextData = {
     movies: moviesList,
     series: seriesList,
@@ -143,6 +147,8 @@ export const EntertainmentContextProvider = ({ children }) => {
     isLoadingSeries,
     selectGenre,
     search: fetchSearch,
+    defultMoviesList,
+    defultSeriesList,
   };
 
   return (

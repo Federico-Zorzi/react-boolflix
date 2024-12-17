@@ -12,10 +12,11 @@ export default function FilterSelect({ handleFormData, formData }) {
     },
   };
 
-  const { selectGenre } = useEntertainmentContext();
+  const { defultMoviesList, defultSeriesList, selectGenre } =
+    useEntertainmentContext();
 
+  //* fetch for take categories from api {id: , name: }
   const [genresList, setGenresList] = useState([]);
-
   const categoriesList = () => {
     fetch(url, options)
       .then((res) => res.json())
@@ -36,6 +37,7 @@ export default function FilterSelect({ handleFormData, formData }) {
       value={formData.genre}
       onChange={handleFormData}
       name="genre"
+      disabled={!defultMoviesList.length > 0 && !defultSeriesList.length > 0}
     >
       <option value="">Select genre...</option>
       {genresList && Array.isArray(genresList)
