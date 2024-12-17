@@ -117,13 +117,19 @@ export const EntertainmentContextProvider = ({ children }) => {
   };
 
   const selectGenre = (id) => {
-    let movieListFiltered = defultMoviesList;
+    let moviesListFiltered = defultMoviesList;
+    let seriesListFiltered = defultSeriesList;
 
     if (id) {
-      movieListFiltered = defultMoviesList.filter((movie) =>
+      moviesListFiltered = defultMoviesList.filter((movie) =>
         movie.genre.includes(parseInt(id))
       );
-      setMoviesList(movieListFiltered);
+      seriesListFiltered = defultSeriesList.filter((serie) =>
+        serie.genre.includes(parseInt(id))
+      );
+
+      setMoviesList(moviesListFiltered);
+      setSeriesList(seriesListFiltered);
     } else {
       setMoviesList(defultMoviesList);
       setSeriesList(defultSeriesList);
