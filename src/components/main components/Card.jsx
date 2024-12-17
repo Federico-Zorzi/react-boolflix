@@ -14,6 +14,7 @@ export default function Card({
     if (newLang == "sv") newLang = "SE";
     if (newLang == "hi") newLang = "IN";
     if (newLang == "ja") newLang = "JP";
+    if (newLang == "zh") newLang = "CN";
 
     return newLang.toUpperCase();
   };
@@ -38,14 +39,14 @@ export default function Card({
     return decodStars;
   };
 
-  const posterPath = import.meta.env.VITE_API_URL_POSTER_IMAGES;
+  const posterPath = "https://image.tmdb.org/t/p/w342";
 
   const language = languagesManagement(originalLanguage);
   const flagImgPath = `https://flagsapi.com/${language}/flat/64.png`;
   const startsConv = rateStarsConversion(vote);
 
   return (
-    <div className="card">
+    <div className="card h-100">
       <div className="overlay">
         {posterImage ? (
           <img
@@ -61,7 +62,7 @@ export default function Card({
         )}
       </div>
 
-      <div className="card-body h-100">
+      <div className="card-body">
         <h5 className="card-title">{title}</h5>
         <h6>({originalTitle})</h6>
         <div className="language text-center">
