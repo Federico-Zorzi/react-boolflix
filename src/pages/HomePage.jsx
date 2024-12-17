@@ -5,6 +5,7 @@ import { useEntertainmentContext } from "../context/EntertainmentContext";
 import Card from "../components/main components/Card";
 
 export default function HomePage() {
+  //* print cards function
   const printCard = ({
     id,
     title,
@@ -28,6 +29,7 @@ export default function HomePage() {
     );
   };
 
+  //* variables from context for print cards
   const { movies, series, isLoadingMovies, isLoadingSeries } =
     useEntertainmentContext();
 

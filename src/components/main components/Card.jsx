@@ -47,11 +47,11 @@ export default function Card({
 
   return (
     <div className="card h-100">
-      <div className="overlay">
+      <div className="overlay h-100">
         {posterImage ? (
           <img
             src={`${posterPath}${posterImage}`}
-            className="card-img-top img-fluid rounded"
+            className="card-img-top img-fluid rounded h-100"
           />
         ) : (
           <div className="rounded bg-white position-absolute w-100 h-100">
